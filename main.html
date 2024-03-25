@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Scheduling and Tracking</title>
+    <style>
+        
+        nav {
+        background-color: tomato;
+        text-align: center;
+        position: fixed;
+        top: 0px;
+        width: 100%;
+      }
+      nav ul {
+        display: flex;
+        list-style: none;
+        justify-content: space-around;
+        align-items: center;
+      }
+      nav ul li {
+        letter-spacing: 2px;
+        width: 100;
+        margin: 10px;
+        padding: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+      }
+      nav ul  :hover{
+        background-color: gray;
+        
+      }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: cream; /* Change background color to cream */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            color: brown; /* Change heading color to brown */
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 10px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #4CAF50; /* Change button background color to green */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #busForm button[type="submit"] {
+            background-color: blue; /* Change get bus schedule button background color to blue */
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            color: blue; /* Change bus schedule text color to blue */
+        }
+
+        #liveTracking {
+            color: green; /* Change live bus tracking text color to green */
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+          <li>Home</li>
+          <li>Recent Journey</li>
+          <li>Tourist</li>
+          <li>My profile</li>
+          
+         
+        </ul>
+      </nav>
+    <div class="container">
+        <h1>Bus Scheduling and Tracking</h1>
+       
+        <!-- Form for entering 'From' and 'To' details -->
+        <form id="busForm" onsubmit="return getBusSchedule()">
+            <label for="from">From:</label>
+            <input type="text" id="from" name="from" required>
+           
+            <label for="to">To:</label>
+            <input type="text" id="to" name="to" required>
+           
+            <button type="submit">Get Bus Schedule</button>
+        </form>
+
+        <!-- Table to display bus schedule -->
+        <div id="busSchedule" class="hidden">
+            <h2>Bus Schedule</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bus Number</th>
+                        <th>Arrival Time</th>
+                        <th>Departure Time</th>
+                    </tr>
+                </thead>
+                <tbody id="scheduleBody"></tbody>
+            </table>
+        </div>
+
+        <!-- Option for live bus tracking -->
+        <div id="liveTracking">
+            <h2>Live Bus Tracking</h2>
+            <button onclick="trackLiveBus()">Track Live Bus</button>
+        </div>
+
+        <!-- Option for booking tickets -->
+        <div id="bookTickets">
+            <h2>Book Tickets</h2>
+            <button>Book Tickets</button>
+        </div>
+    </div>
+
+    <script>
+        function getBusSchedule() {
+            var from = document.getElementById('from').value;
+            var to = document.getElementById('to').value;
+           
+            // Here you would make an API call to get bus schedule based on 'from' and 'to' locations
+            // For demonstration, let's just display a mock schedule
+            var scheduleBody = document.getElementById('scheduleBody');
+            scheduleBody.innerHTML = "";
+
+            // Mock data - replace this with actual API response
+            var busData = [
+                { number: 'ABC123', arrival: '10:00 AM', departure: '10:30 AM' },
+                { number: 'XYZ456', arrival: '11:00 AM', departure: '11:30 AM' },
+                // Add more bus data as needed
+            ];
+
+            // Loop through the bus data and create table rows dynamically
+            for (var i = 0; i < busData.length; i++) {
+                var row = "<tr><td>" + busData[i].number + "</td><td>" + busData[i].arrival + "</td><td>" + busData[i].departure + "</td></tr>";
+                scheduleBody.innerHTML += row;
+            }
+
+            // Show the bus schedule table
+            document.getElementById('busSchedule').classList.remove('hidden');
+
+            return false; // Prevent form submission
+        }
+
+        function trackLiveBus() {
+            // Here you would integrate live bus tracking using GPS data
+            alert("Live bus tracking feature is not available in this demo.");
+        }
+    </script>
+</body>
+</html>
